@@ -47,10 +47,13 @@ def getkey(request):
 
 def refreshkey(request):
     last = readjson('data.json')["time"]
-    print(last)
+    # print(last)
     if time.time() - last > 20:
         re = readjson('data.json')
-        a_dict = {"time": time.time(), "key": get_link(), "home": re["home"]}
+        ss = get_link(re["home"])
+        if ss == "erro":
+            return HttpResponse("Sorry, Please refresh home try again")
+        a_dict = {"time": time.time(), "key": get_link(re["home"]), "home": re["home"]}
         writejson(a_dict)
         return HttpResponse("OK")
     else:
@@ -59,10 +62,13 @@ def refreshkey(request):
 
 def refreshhome(request):
     last = readjson('data.json')["time"]
-    print(last)
+    # print(last)
     if time.time() - last > 20:
         re = readjson('data.json')
-        a_dict = {"time": time.time(), "key": re["key"], "home": get_home}
+        home_link = get_home()
+        if s == "erro":
+            return HttpResponse("Sorry, We can't open the home")
+        a_dict = {"time": time.time(), "key": re["key"], "home": home_link}
         writejson(a_dict)
         return HttpResponse("OK")
     else:
@@ -70,9 +76,9 @@ def refreshhome(request):
 
 
 def gethome(request):
-    resp = {'home': "https://www.99mm4.com"}
+    re = readjson('data.json')
+    resp = {'home': re["home"]}
     return HttpResponse(json.dumps(resp), content_type="application/json")
-
 
 # def itchademo(request):
 #     event_obj = threading.Event()
