@@ -23,6 +23,7 @@ urlpatterns = [
     # url('testlo/', views.testlo),
     url('^key/$', views.getkey),
     url('^refreshkey/$', views.refreshkey),
+    url('^refreshhome/$', views.refreshhome),
     url('^gethome/$', views.gethome),
     url('^home/$', views.home),
     # path('hello/', views.hello),
