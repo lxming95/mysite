@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function setValuesJson(param)
+        {
+            alert(param);//param是java传过来的值，即"hello world".
+            var result = "传回Java的string";
+            window.stub.jsMethod(result);//用接口stub, 通过调用内部类中的方法jsMethod给java传回result。
+        }
+</script>
+</head>
+<body>
+<H2>There is Nothing,{{ key }}</H2>
+</body>
+</html>
