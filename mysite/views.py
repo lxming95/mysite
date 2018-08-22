@@ -66,7 +66,7 @@ def refreshhome(request):
     if time.time() - last > 20:
         re = readjson('data.json')
         home_link = get_home()
-        if s == "erro":
+        if home_link == "erro":
             return HttpResponse("Sorry, We can't open the home")
         a_dict = {"time": time.time(), "key": re["key"], "home": home_link}
         writejson(a_dict)
