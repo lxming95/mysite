@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup
 
 
 # lasttime = 1534836232.4316688
-from mysite.file_rw import readjson
 
 
 def gethtml(url):

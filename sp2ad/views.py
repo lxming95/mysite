@@ -4,11 +4,10 @@ import time
 
 from django.shortcuts import render, HttpResponse
 # from itchatdemo import itchatlogin
-import threading
 
 # Create your views here.
-from mysite.file_rw import writejson, readjson
-from mysite.spiderDemo import get_link, get_home
+from sp2ad.file_rw import writejson, readjson
+from sp2ad.spiderDemo import get_link, get_home
 
 s = r'https://media2.99kk44.com/remote_control.php?time=1534833978&cv=e0051df0f4cd9ab37ca551e4d1ed2107&lr=0&cv2=996ffd7d8ac8c121b0b0d718ffe52dbd&file=/videos/%s/%s/%s.mp4'
 user_DICT = {'k1': 'root1', 'k2': 'root2', 'k3': 'root3'}
