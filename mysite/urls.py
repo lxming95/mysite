@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
+from django.conf.urls import url, include
 from sp2ad import views
+import article.views
+# from DjangoUeditor import urls as djud_urls
+from mysite import settings
 
 urlpatterns = [
+    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     path('admin/', admin.site.urls),
     # url('testlo/', views.testlo),
     url('^key/$', views.getkey),
@@ -30,5 +34,10 @@ urlpatterns = [
     url(r'^$', views.homepage),
     # url(r'^image/$', views.itchademo, name="image"),
 
+    url('^blog/$', article.views.home, name='home'),
+    # url(r'^(?P<id>\d+)/$', article.views.detail, name='detail'),
+    url(r'^blog/(?P<id>\d+)/$', article.views.detail, name='detail'),
+
 ]
+
 # handler404 = views.page_not_found  # 404
