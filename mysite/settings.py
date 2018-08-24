@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'article',
     'sp2ad',
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [
@@ -123,18 +124,18 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # STATIC_ROOT = "I:/py/mysite/static"
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 
-# # 公共的static文件
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "common_static"),
-#     os.path.join(BASE_DIR, "media"),
-# )
-#
-# # upload floder
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#
-# STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
-#                        "django.contrib.staticfiles.finders.AppDirectoriesFinder",)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# 公共的static文件
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "common_static"),
+    os.path.join(BASE_DIR, "media"),
+)
+
+# upload floder
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_FINDERS = ("django.contrib.staticfiles.finders.FileSystemFinder",
+                       "django.contrib.staticfiles.finders.AppDirectoriesFinder",)

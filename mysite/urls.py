@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import url, include
 from sp2ad import views
 import article.views
-# from DjangoUeditor import urls as djud_urls
+from DjangoUeditor import urls as djud_urls
 from mysite import settings
 
 urlpatterns = [
@@ -38,6 +38,13 @@ urlpatterns = [
     # url(r'^(?P<id>\d+)/$', article.views.detail, name='detail'),
     url(r'^blog/(?P<id>\d+)/$', article.views.detail, name='detail'),
 
+    url(r'^ueditor/', include(djud_urls)),
+
 ]
+
+if settings.DEBUG:
+    from django.conf.urls.static import static
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # handler404 = views.page_not_found  # 404
