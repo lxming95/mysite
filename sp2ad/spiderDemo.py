@@ -3,21 +3,23 @@ import urllib.parse
 # import request
 from urllib import request
 from urllib.error import URLError
-
+import ssl
 from bs4 import BeautifulSoup
 
 # index = r'https://99mm4.com/'
 
 
 # lasttime = 1534836232.4316688
-
-
+ssl._create_default_https_context = ssl._create_unverified_context
+headers = {    'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.137 Safari/537.36 LBBROWSER'}
 def gethtml(url):
     try:
-        page = request.urlopen(url)
+        req = request.Request(url=url, headers=headers)
+        page = request.urlopen(req)
         htmlcode = page.read().decode()  # 读取页面源码
         # htmlcode = htmlcode.decode('utf-8')
         # print(htmlcode)  # 在控制台输出
+        page.close
         return htmlcode
     except URLError as e:
         print(e)
@@ -65,8 +67,11 @@ def get_link(index):
             break
         if re.findall(r"get_file.*.mp4/", html):
             get_video = index + re.findall(r"get_file.*.mp4/", html)[0]
-            page = request.urlopen(get_video)
+            # print(get_video)
+            req = request.Request(url=get_video, headers=headers)
+            page = request.urlopen(req)
             link = page.geturl()
+            page.close
             link = re.sub(r'&' + link.split(r'&')[5], '', link)
             link = urllib.parse.unquote(link)
             link = re.sub(r'/\d{5}', r'/%s', link)
@@ -103,10 +108,12 @@ def get_home():
         if a_title is not None:
             # 链接
             links["href"] = a_title[0]['href']
-    # print(links['href'])
+    print(links['href'])
     try:
-        page = request.urlopen(links['href'])
+        req = request.Request(url=links['href'], headers=headers)
+        page = request.urlopen(req)
         link = page.geturl()
+        page.close
         return link
     except URLError as e:
         # print(e)
