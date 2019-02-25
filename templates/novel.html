@@ -1,0 +1,18 @@
+#post.html
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="posts">
+        <section class="post">
+{#            <header class="post-header">#}
+{#                <h2 class="post-title">{{ post.title }}</h2>#}
+{#            </header>#}
+
+            <div class="post-description">
+                <p>
+                    {{ post.content }}
+                </p>
+            </div>
+        </section>
+    </div><!-- /.blog-post -->
+{% endblock %}

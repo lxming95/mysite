@@ -22,29 +22,31 @@ from DjangoUeditor import urls as djud_urls
 from mysite import settings
 
 urlpatterns = [
-    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    path('admin/', admin.site.urls),
-    # url('testlo/', views.testlo),
-    url('^key/$', views.getkey),
-    url('^refreshkey/$', views.refreshkey),
-    url('^refreshhome/$', views.refreshhome),
-    url('^gethome/$', views.gethome),
-    url('^home/$', views.home),
-    # path('hello/', views.hello),
-    url(r'^$', views.homepage),
-    # url(r'^image/$', views.itchademo, name="image"),
+	# url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
+	path('admin/', admin.site.urls),
+	# url('testlo/', views.testlo),
+	url('^key/$', views.getkey),
+	url('^refreshkey/$', views.refreshkey),
+	url('^refreshhome/$', views.refreshhome),
+	url('^gethome/$', views.gethome),
+	url('^home/$', views.home),
+	# path('hello/', views.hello),
+	url(r'^$', views.homepage),
+	# url(r'^image/$', views.itchademo, name="image"),
+	url('^add/$', article.views.addnovel),
+	url('^blog/$', article.views.home, name='home'),
+	# url(r'^(?P<id>\d+)/$', article.views.detail, name='detail'),
+	url(r'^blog/(?P<id>\d+)/$', article.views.detail, name='detail'),
 
-    url('^blog/$', article.views.home, name='home'),
-    # url(r'^(?P<id>\d+)/$', article.views.detail, name='detail'),
-    url(r'^blog/(?P<id>\d+)/$', article.views.detail, name='detail'),
-
-    url(r'^ueditor/', include(djud_urls)),
+	url(r'^ueditor/', include(djud_urls)),
+	url(r'^del/(\d+)', article.views.delnovel),
+	url(r'^novel/(.*)', article.views.novel)
 
 ]
 
 if settings.DEBUG:
-    from django.conf.urls.static import static
+	from django.conf.urls.static import static
 
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # handler404 = views.page_not_found  # 404

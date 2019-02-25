@@ -1,7 +1,7 @@
 import json
 
-import time
-
+import time,datetime
+from article.models import Article
 from django.shortcuts import render, HttpResponse
 # from itchatdemo import itchatlogin
 
@@ -15,69 +15,81 @@ lasttime = 1534836232.4316688
 
 
 def page_not_found(request):
-    return render(request, 'index.html')
+	return render(request, 'index.html')
 
 
 def testlo(request):
-    return render(request, 'testloop.html', {'user_dict': user_DICT})
+	return render(request, 'testloop.html', {'user_dict': user_DICT})
 
 
 def home(request):
-    return render(request, 'index.html')
+	return render(request, 'index.html')
 
 
 def homepage(request):
-    # return render(request, '99re.html', {'user_dict': user_DICT})
+	# return render(request, '99re.html', {'user_dict': user_DICT})
 
-    return HttpResponse("Sorry, This is not page for U")
+	return HttpResponse("Sorry, This is not page for U")
 
 
 def hello(request):
-    return HttpResponse("Hello world")
+	return HttpResponse("Hello world")
 
 
 def getkey(request):
-    # resp = {'home': get_link()}
-    re = readjson('data.json')
-    resp = {'key': re["key"]}
-    return HttpResponse(json.dumps(resp), content_type="application/json")
-    # return render(request, 'key.html', {'key': s})
+	# resp = {'home': get_link()}
+	re = readjson('data.json')
+	resp = {'key': re["key"]}
+	return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+# return render(request, 'key.html', {'key': s})
 
 
 def refreshkey(request):
-    last = readjson('data.json')["time"]
-    # print(last)
-    if time.time() - last > 20:
-        re = readjson('data.json')
-        ss = get_link(re["home"])
-        if ss == "erro":
-            return HttpResponse("Sorry, Please refresh home try again")
-        a_dict = {"time": time.time(), "key": get_link(re["home"]), "home": re["home"]}
-        writejson(a_dict)
-        return HttpResponse("OK")
-    else:
-        return HttpResponse("Sorry, IT is too frequently")
+	last = readjson('data.json')["time"]
+	# print(last)
+	if time.time() - last > 20:
+		re = readjson('data.json')
+		ss = get_link(re["home"])
+		if ss == "erro":
+			return HttpResponse("Sorry, Please refresh home try again")
+		a_dict = {"time": time.time(), "key": get_link(re["home"]), "home": re["home"]}
+		writejson(a_dict)
+		return HttpResponse("OK")
+	else:
+		return HttpResponse("Sorry, IT is too frequently")
 
 
 def refreshhome(request):
-    last = readjson('data.json')["time"]
-    # print(last)
-    if time.time() - last > 20:
-        re = readjson('data.json')
-        home_link = get_home()
-        if home_link == "erro":
-            return HttpResponse("Sorry, We can't open the home")
-        a_dict = {"time": time.time(), "key": re["key"], "home": home_link}
-        writejson(a_dict)
-        return HttpResponse("OK")
-    else:
-        return HttpResponse("Sorry, IT is too frequently")
+	last = readjson('data.json')["time"]
+	# print(last)
+	if time.time() - last > 20:
+		re = readjson('data.json')
+		home_link = get_home()
+		if home_link == "erro":
+			return HttpResponse("Sorry, We can't open the home")
+		a_dict = {"time": time.time(), "key": re["key"], "home": home_link}
+		writejson(a_dict)
+		return HttpResponse("OK")
+	else:
+		return HttpResponse("Sorry, IT is too frequently")
 
 
 def gethome(request):
-    re = readjson('data.json')
-    resp = {'home': re["home"]}
-    return HttpResponse(json.dumps(resp), content_type="application/json")
+	re = readjson('data.json')
+	resp = {'home': re["home"]}
+	return HttpResponse(json.dumps(resp), content_type="application/json")
+
+
+def getallnovel(request):
+	return render(request, 'testloop.html', {'user_dict': user_DICT})
+
+
+def addnovel(request):
+	novle = Article(title="ceshi", category="test", date_time=datetime.datetime.now(), content="test add")
+	novle.save
+	return HttpResponse("Ok")
 
 # def itchademo(request):
 #     event_obj = threading.Event()

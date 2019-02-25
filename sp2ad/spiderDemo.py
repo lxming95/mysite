@@ -5,8 +5,9 @@ from urllib import request
 from urllib.error import URLError
 import ssl
 from bs4 import BeautifulSoup
+import base64 as b64
 
-# index = r'https://99mm4.com/'
+# index = b'aHR0cDovL3d3dy45OXd3OC5jb20='
 
 
 # lasttime = 1534836232.4316688
@@ -99,7 +100,8 @@ def get_link(index):
 
 
 def get_home():
-    re99 = gethtml(r'https://github.com/99redizhi/99re/wiki')
+    s=b'aHR0cHM6Ly9naXRodWIuY29tLzk5cmVkaXpoaS85OXJlL3dpa2k='
+    re99 = gethtml(b64.b64decode(s).decode())
     soup = BeautifulSoup(re99, 'html.parser')
     all_div = soup.find_all('div', attrs={'class': 'markdown-body'}, limit=2)
     links = {}
